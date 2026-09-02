@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SBCC 控制中心</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <!-- ─── 登录弹窗 ──────────────────────────── -->
+    <div class="login-overlay" id="loginOverlay">
+        <div class="login-box">
+            <div class="login-header">SBCC 控制中心</div>
+            <div class="login-tabs">
+                <span class="login-tab active" data-tab="login">登录</span>
+                <span class="login-tab" data-tab="register">注册</span>
+            </div>
+
+            <!-- 登录表单 -->
+            <form id="loginForm" class="login-form">
+                <input type="text" id="loginUsername" placeholder="用户名" autocomplete="username" required>
+                <input type="password" id="loginPassword" placeholder="密码" autocomplete="current-password" required>
+                <button type="submit">登 录</button>
+                <p class="login-error" id="loginError"></p>
+            </form>
+
+            <!-- 注册表单 -->
+            <form id="registerForm" class="login-form" style="display:none">
+                <input type="text" id="registerUsername" placeholder="用户名" autocomplete="off" required>
+                <input type="password" id="registerPassword" placeholder="密码（至少6位）" autocomplete="new-password" required>
+                <button type="submit">注 册</button>
+                <p class="login-error" id="registerError"></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- ─── 主页面 ────────────────────────────── -->
+    <div class="container" id="mainContent" style="display:none">
+        <header>
+            <div class="header-top">
+                <div>
+                    <h1>SBCC 控制中心</h1>
+                    <p>实时数据监控</p>
+                </div>
+                <div class="user-info">
+                    <span class="user-name" id="userName"></span>
+                    <button class="btn-logout" id="btnLogout">注销</button>
+                </div>
+            </div>
+        </header>
+
+        <div class="status-bar">
+            <div class="status-dot" id="statusDot"></div>
+            <span class="status-text" id="statusText">连接中...</span>
+        </div>
+
+        <div class="data-card" id="dataCard">
+            <div class="data-label">当前数值</div>
+            <div class="data-value" id="dataValue">---</div>
+            <div class="data-time" id="dataTime">等待数据...</div>
+        </div>
+
+        <div class="history">
+            <h3>历史记录</h3>
+            <div class="history-list" id="historyList">
+                <div class="empty-msg">暂无数据</div>
+            </div>
+        </div>
+
+        <button class="btn-test" id="btnTestMsg">发送测试消息</button>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
