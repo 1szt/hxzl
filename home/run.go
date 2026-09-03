@@ -8,7 +8,7 @@ import (
 
 
 func Run() {
-	web.Engine.GET("/", home)
+	web.Router.GET("/", home)
 
 	log.Print("✅ [Home] 主页模块 加载完成！")
 }
