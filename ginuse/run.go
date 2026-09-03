@@ -5,7 +5,7 @@ package ginuse
 // 以确保中间件在请求到达前就绪
 
 import (
-	web "1szt/gin"
+	web "mcup-server/gin"
 
 	g "github.com/gin-gonic/gin"
 )

@@ -1,10 +1,10 @@
 package main
 
 import (
-	"1szt/gin"
-	"1szt/ginuse"
-	"1szt/home"
-	"1szt/motd"
+	"mcup-server/gin"
+	"mcup-server/ginuse"
+	"mcup-server/home"
+	"mcup-server/motd"
 )
 
 func main() {

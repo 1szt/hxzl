@@ -1,7 +1,7 @@
 package home
 
 import (
-	web "1szt/gin"
+	web "mcup-server/gin"
 	g "github.com/gin-gonic/gin"
 	"log"
 )

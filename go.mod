@@ -1,11 +1,8 @@
-module 1szt
+module mcup-server
 
 go 1.27.0
 
-require (
-	github.com/gin-gonic/gin v1.12.0
-	github.com/go-chi/chi/v5 v5.3.2
-)
+require github.com/gin-gonic/gin v1.12.0
 
 require (
 	github.com/bytedance/gopkg v0.1.3 // indirect
