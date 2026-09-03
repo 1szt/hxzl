@@ -2,6 +2,7 @@ package main
 
 import (
 	"mcup-server/gin"
+	"mcup-server/gininit"
 	"mcup-server/home"
 	"mcup-server/motd"
 )
@@ -9,9 +10,7 @@ import (
 func main() {
 	motd.Run()
 
-	gin.Middleware()
-	gin.Static()
-	gin.Template()
+	gininit.Run()
 
 	home.Run()
 
