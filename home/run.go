@@ -1,11 +1,11 @@
 package home
 
 import (
-	web "mcup-server/gin"
-	g "github.com/gin-gonic/gin"
 	"log"
-)
+	web "mcup-server/gin"
 
+	g "github.com/gin-gonic/gin"
+)
 
 func Run() {
 	web.Router.GET("/", home)
@@ -14,5 +14,6 @@ func Run() {
 }
 
 func home(c *g.Context) {
-	c.String(200, "你好，世界！")
+	// 渲染 template/index.html 中名为 "index" 的模板
+	c.HTML(200, "index", nil)
 }

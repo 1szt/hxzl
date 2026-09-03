@@ -13,6 +13,8 @@ func Run() {
 	// 记录日志
 	web.Router.Use(g.Logger())
 
+	web.Router.LoadHTMLGlob("template/*.html")
+
 	web.Router.StaticFile("/favicon.ico", "./favicon.ico")
 	web.Router.Static("/static", "./static")
 }
