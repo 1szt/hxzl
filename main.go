@@ -1,6 +1,7 @@
 package main
 
 import (
+	"mcup-server/config"
 	"mcup-server/gin"
 	"mcup-server/gininit"
 	"mcup-server/home"
@@ -9,6 +10,7 @@ import (
 
 func main() {
 	motd.Run()
+	config.Run()
 
 	gininit.Run()
 

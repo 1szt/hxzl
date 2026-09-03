@@ -3,8 +3,6 @@ package motd
 import "fmt"
 
 func Run() {
-	// 打印motd
-	// motd
 	fmt.Print("========================================\n")
 	fmt.Print("             mcup 控制中心启动！          \n")
 	fmt.Print("========================================\n")
