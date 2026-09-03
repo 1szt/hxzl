@@ -1,4 +1,4 @@
-package ginuse
+package middleware
 
 import (
 	web "mcup-server/gin"

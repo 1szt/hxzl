@@ -2,17 +2,22 @@ package main
 
 import (
 	"mcup-server/gin"
-	"mcup-server/ginuse"
 	"mcup-server/home"
+	"mcup-server/middleware"
 	"mcup-server/motd"
+	"mcup-server/static"
+	"mcup-server/template"
 )
 
 func main() {
 	motd.Run()
-	// 加载中间件
-	ginuse.Run()
-	// 加载模块
+
+	middleware.Run()
+	static.Run()
+
 	home.Run()
-	// 启动服务
+
+	template.Run()
+
 	gin.Run()
 }
