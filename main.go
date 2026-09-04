@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	
+
 	motd.Run()
 
 	config.Run()

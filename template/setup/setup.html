@@ -1,0 +1,17 @@
+{{ define "setup" }}
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>初始化配置</title>
+</head>
+<body>
+    <h1>系统初始化</h1>
+    <p>请点击下方按钮完成初始化并重启程序。</p>
+
+    <form action="/setup" method="post">
+        <button type="submit">重启程序</button>
+    </form>
+</body>
+</html>
+{{ end }}
