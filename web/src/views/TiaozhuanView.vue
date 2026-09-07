@@ -10,10 +10,10 @@
 
         <button @click="goToHome">编程式跳转</button>
 
-        <button @click="goToBack" >返回</button>\
+        <button @click="goToBack">返回</button>\
 
 
-        <button @click="goToRepeat" >替换 不可返回</button>
+        <button @click="goToRepeat">替换 不可返回</button>
 
 
     </div>
