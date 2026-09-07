@@ -6,6 +6,7 @@ import {
 import HomeView from '../views/HomeView.vue'
 import CsView from '../views/CsView.vue'
 import Cs1View from '../views/Cs1View.vue'
+import TiaozhuanView from '../views/TiaozhuanView.vue'
 
 const routes = [
   {
@@ -22,6 +23,11 @@ const routes = [
     path: '/cs1',
     name: 'Cs1',
     component: Cs1View
+  },
+  {
+    path: '/tiaozhuan',
+    name: 'tiaozhuan',
+    component: TiaozhuanView
   }
 ]
 
