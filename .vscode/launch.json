@@ -14,6 +14,17 @@
             "env": {
                 "GIN_MODE": "debug"
             }
+        },
+        {
+            "name": "client",
+            "type": "java",
+            "request": "launch",
+            "mainClass": "com.mcup.client.Main",
+            "classPaths": [
+                "${workspaceFolder}/client/target/classes"
+            ],
+            "cwd": "${workspaceFolder}/client",
+            "console": "integratedTerminal"
         }
     ]
 }
