@@ -8,6 +8,7 @@ import CsView from '../views/CsView.vue'
 import Cs1View from '../views/Cs1View.vue'
 import TiaozhuanView from '../views/TiaozhuanView.vue'
 import VModel from '../views/V-Model.vue'
+import Setup from '../views/Setup.vue'
 
 const routes = [
   {
@@ -34,6 +35,11 @@ const routes = [
     path: '/v-model',
     name: 'V-Model',
     component: VModel
+  },
+  {
+    path: '/setup',
+    name: 'Setup',
+    component: Setup
   }
 
 ]
