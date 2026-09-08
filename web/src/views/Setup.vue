@@ -1,12 +1,12 @@
 <template>
-    <div class="bg-secondary">
-        <div class="text-right m-2 p-2">
+    <div class="page">
+        <div class="lang-bar">
             <a v-for="lang in languages" :key="lang.code" :href="lang.url" class="mx-2 p-1 label label-secondary">
                 {{ lang.name }}
             </a>
         </div>
 
-        <div class="hero d-flex">
+        <div class="hero">
             <div class="hero-body">
                 <h1 class="text-center">
                     <a class="text-primary" href="https://github.com/bs-community/blessing-skin-server">
@@ -14,13 +14,16 @@
                     </a>
                 </h1>
                 <div class="divider"></div>
-                <h3>欢迎</h3>
-                <div class="divider"></div>
-                <p>欢迎使用 mcup-server v0.0.1！</p>
+                <div class="content-center-left">
+                    <h3>欢迎</h3>
+                    <div class="divider"></div>
+                    <p>欢迎使用 mcup-server v0.0.1！</p>
+                </div>
                 <p class="step">
                     <a href="https://skin.1szt.com/setup/database" class="btn btn-primary">
                         下一步
                     </a>
+                    <CuteButton text="下一步" type="primary" @click="handleNext" />
                 </p>
             </div>
         </div>
@@ -28,6 +31,14 @@
 </template>
 
 <script setup lang="ts">
+
+import CuteButton from '../components/CuteButton.vue'
+
+
+const handleNext = () => {
+    window.location.href = 'https://skin.1szt.com/setup/database'
+}
+
 const languages = [
     { code: 'zh_CN', name: '中文 (简体)', url: 'https://skin.1szt.com/setup?lang=zh_CN' },
     { code: 'zh_TW', name: '中文 (正體)', url: 'https://skin.1szt.com/setup?lang=zh_TW' },
@@ -37,34 +48,30 @@ const languages = [
 ]
 </script>
 
+
+
+
 <style scoped>
-.bg-secondary {
-    background: #f1f1fc !important;
+.page {
+    background: #f1f1fc;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
-.text-right {
+.lang-bar {
     text-align: right;
-}
-
-.text-center {
-    text-align: center;
-}
-
-.m-2 {
-    margin: 0.4rem !important;
-}
-
-.p-2 {
-    padding: 0.4rem !important;
-}
-
-.p-1 {
-    padding: 0.2rem !important;
+    margin: 0.4rem;
+    padding: 0.4rem;
 }
 
 .mx-2 {
     margin-left: 0.4rem !important;
     margin-right: 0.4rem !important;
+}
+
+.p-1 {
+    padding: 0.2rem !important;
 }
 
 .label {
@@ -81,20 +88,27 @@ const languages = [
     color: #5755d9;
 }
 
-.d-flex {
-    display: flex;
-}
-
 .hero {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    padding-bottom: 4rem;
-    padding-top: 4rem;
+    justify-content: center;
+    padding: 2rem;
 }
 
-.hero .hero-body {
-    padding: 0.4rem;
+.hero-body {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.content-center-left {
+    text-align: center;
+    padding-left: 1rem;
 }
 
 .divider {
@@ -119,6 +133,8 @@ a.text-primary:visited {
 
 .step {
     padding: 0.2rem;
+    text-align: center;
+    margin-top: 1rem;
 }
 
 .btn {

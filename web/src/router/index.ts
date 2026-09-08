@@ -9,6 +9,7 @@ import Cs1View from '../views/Cs1View.vue'
 import TiaozhuanView from '../views/TiaozhuanView.vue'
 import VModel from '../views/V-Model.vue'
 import Setup from '../views/Setup.vue'
+import Lifecycle from '../views/Lifecycle.vue'
 
 const routes = [
   {
@@ -40,6 +41,11 @@ const routes = [
     path: '/setup',
     name: 'Setup',
     component: Setup
+  },
+  {
+    path: '/lifecycle',
+    name: 'Lifecycle',
+    component: Lifecycle
   }
 
 ]
