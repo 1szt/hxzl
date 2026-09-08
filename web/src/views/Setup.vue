@@ -23,6 +23,7 @@
                     <a href="https://skin.1szt.com/setup/database" class="btn btn-primary">
                         下一步
                     </a>
+                    <CuteButton text="下一步" type="primary" @click="handleNext" />
                 </p>
             </div>
         </div>
@@ -30,6 +31,14 @@
 </template>
 
 <script setup lang="ts">
+
+import CuteButton from '../components/CuteButton.vue'
+
+
+const handleNext = () => {
+    window.location.href = 'https://skin.1szt.com/setup/database'
+}
+
 const languages = [
     { code: 'zh_CN', name: '中文 (简体)', url: 'https://skin.1szt.com/setup?lang=zh_CN' },
     { code: 'zh_TW', name: '中文 (正體)', url: 'https://skin.1szt.com/setup?lang=zh_TW' },
@@ -38,6 +47,9 @@ const languages = [
     { code: 'ru_RU', name: 'Русский язык', url: 'https://skin.1szt.com/setup?lang=ru_RU' },
 ]
 </script>
+
+
+
 
 <style scoped>
 .page {
