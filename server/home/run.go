@@ -14,6 +14,5 @@ func Run() {
 }
 
 func home(c *g.Context) {
-	// 渲染 template/index.html 中名为 "index" 的模板
-	c.HTML(200, "index", nil)
+	c.String(200, "主页")
 }
