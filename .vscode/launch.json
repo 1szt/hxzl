@@ -25,12 +25,13 @@
             "name": "client",
             "type": "java",
             "request": "launch",
-            "mainClass": "com.mcup.client.Main",
+            "mainClass": "Main",
             "classPaths": [
                 "${workspaceFolder}/client/target/classes"
             ],
             "cwd": "${workspaceFolder}/client",
-            "console": "integratedTerminal"
+            "console": "integratedTerminal",
+            "preLaunchTask": "compile-java"
         }
     ]
 }

@@ -1,5 +1,3 @@
-package com.mcup.client;
-
 import javax.swing.*;
 import java.awt.*;
 
