@@ -28,13 +28,19 @@ jobs:
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
 
+      - name: Get Android SDK path
+        id: android
+        run: |
+          SDK_PATH=$(sdkmanager --list_installed 2>/dev/null | head -1 || echo "$ANDROID_HOME")
+          echo "path=$ANDROID_HOME" >> $GITHUB_OUTPUT
+
       - name: Install Android NDK
         run: sdkmanager "ndk;27.0.12077973"
 
       - name: Setup Android NDK environment
         run: |
-          echo "ANDROID_NDK_HOME=$ANDROID_HOME/ndk/27.0.12077973" >> $GITHUB_ENV
-          echo "$ANDROID_HOME/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/bin" >> $GITHUB_PATH
+          echo "ANDROID_NDK_HOME=${{ steps.android.outputs.path }}/ndk/27.0.12077973" >> $GITHUB_ENV
+          echo "${{ steps.android.outputs.path }}/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/bin" >> $GITHUB_PATH
 
       - name: Install Rust stable
         uses: dtolnay/rust-toolchain@stable
@@ -67,15 +73,15 @@ jobs:
         run: pnpm build
         working-directory: client
 
+      - name: Initialize Tauri Android project
+        run: pnpm tauri android init
+        working-directory: client
+
       - name: Build Android APK
-        uses: tauri-apps/tauri-action@v0
+        run: pnpm tauri android build
+        working-directory: client
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          ANDROID_NDK_HOME: ${{ env.ANDROID_HOME }}/ndk/27.0.12077973
-        with:
-          projectPath: client
-          tauriScript: pnpm tauri
-          args: --target aarch64-linux-android
+          ANDROID_NDK_HOME: ${{ steps.android.outputs.path }}/ndk/27.0.12077973
 
       - name: Upload Android artifacts
         uses: actions/upload-artifact@v4
