@@ -1,11 +1,11 @@
 package main
 
 import (
-	"server/config"
-	"server/gin"
-	"server/gininit"
-	"server/home"
-	"server/motd"
+	"hxzl/config"
+	"hxzl/gin"
+	"hxzl/gininit"
+	"hxzl/home"
+	"hxzl/motd"
 )
 
 func main() {

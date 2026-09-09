@@ -1,0 +1,121 @@
+name: Build Android
+
+on:
+  push:
+    branches: [main, master]
+    tags: ['v*']
+  pull_request:
+    branches: [main, master]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-android:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Java JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Get Android SDK path
+        id: android
+        run: |
+          SDK_PATH=$(sdkmanager --list_installed 2>/dev/null | head -1 || echo "$ANDROID_HOME")
+          echo "path=$ANDROID_HOME" >> $GITHUB_OUTPUT
+
+      - name: Install Android NDK
+        run: sdkmanager "ndk;27.0.12077973"
+
+      - name: Setup Android NDK environment
+        run: |
+          echo "ANDROID_NDK_HOME=${{ steps.android.outputs.path }}/ndk/27.0.12077973" >> $GITHUB_ENV
+          echo "${{ steps.android.outputs.path }}/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/bin" >> $GITHUB_PATH
+
+      - name: Install Rust stable
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: aarch64-linux-android,armv7-linux-androideabi,i686-linux-android,x86_64-linux-android
+
+      - name: Install cargo-ndk
+        run: cargo install cargo-ndk
+
+      - name: Rust cache
+        uses: swatinem/rust-cache@v2
+        with:
+          workspaces: client/src-tauri -> target
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Install frontend dependencies
+        run: pnpm install
+        working-directory: client
+
+      - name: Build frontend
+        run: pnpm build
+        working-directory: client
+
+      - name: Generate debug keystore
+        run: |
+          keytool -genkey -v \
+            -keystore client/src-tauri/gen/android/app/debug.keystore \
+            -alias androiddebugkey \
+            -keyalg RSA \
+            -keysize 2048 \
+            -validity 10000 \
+            -storepass android \
+            -keypass android \
+            -dname "CN=Android Debug,O=Android,C=US"
+
+      - name: Initialize Tauri Android project
+        run: pnpm tauri android init
+        working-directory: client
+
+      - name: Build Android APK
+        run: pnpm tauri android build
+        working-directory: client
+        env:
+          ANDROID_NDK_HOME: ${{ steps.android.outputs.path }}/ndk/27.0.12077973
+
+      - name: Upload Android artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-android
+          path: |
+            client/src-tauri/gen/android/app/build/outputs/apk/**/*.apk
+          retention-days: 7
+
+  release:
+    needs: build-android
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+          merge-multiple: true
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: artifacts/**/*.apk
+          generate_release_notes: true
