@@ -11,15 +11,6 @@
             "mode": "auto",
             "program": "${workspaceFolder}/server",
             "cwd": "${workspaceFolder}/server"
-        },
-        {
-            "name": "web",
-            "type": "node",
-            "request": "launch",
-            "program": "${workspaceFolder}/web/node_modules/vite/bin/vite.js",
-            "cwd": "${workspaceFolder}/web",
-            "console": "integratedTerminal",
-            "skipFiles": ["<node_internals>/**"]
         }
     ]
 }
