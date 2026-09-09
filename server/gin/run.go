@@ -3,7 +3,7 @@ package gin
 import (
 	"log"
 
-	// "mcup-server/config"
+	// "server/config"
 
 	g "github.com/gin-gonic/gin"
 )

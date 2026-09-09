@@ -1,11 +1,11 @@
 package main
 
 import (
-	"mcup-server/config"
-	"mcup-server/gin"
-	"mcup-server/gininit"
-	"mcup-server/home"
-	"mcup-server/motd"
+	"server/config"
+	"server/gin"
+	"server/gininit"
+	"server/home"
+	"server/motd"
 )
 
 func main() {

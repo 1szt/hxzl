@@ -1,7 +1,7 @@
 package gininit
 
 import (
-	web "mcup-server/gin"
+	web "server/gin"
 
 	g "github.com/gin-gonic/gin"
 )
