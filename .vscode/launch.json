@@ -20,17 +20,6 @@
             "cwd": "${workspaceFolder}/web",
             "console": "integratedTerminal",
             "skipFiles": ["<node_internals>/**"]
-        },
-        {
-            "name": "client",
-            "type": "java",
-            "request": "launch",
-            "mainClass": "com.mcup.client.Main",
-            "classPaths": [
-                "${workspaceFolder}/client/target/classes"
-            ],
-            "cwd": "${workspaceFolder}/client",
-            "console": "integratedTerminal"
         }
     ]
 }
