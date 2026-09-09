@@ -66,6 +66,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NDK_HOME: ${{ env.ANDROID_HOME }}/ndk/27.0.12077973
         with:
+          projectPath: client
           tauriScript: pnpm tauri
           args: --target aarch64-linux-android
 
