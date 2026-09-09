@@ -12,7 +12,7 @@
   "app": {
     "windows": [
       {
-        "title": "幻想镇",
+        "title": "hxzl",
         "width": 800,
         "height": 600
       }
@@ -23,22 +23,13 @@
   },
   "bundle": {
     "active": true,
-    "targets": ["nsis"],
+    "targets": "all",
     "icon": [
       "icons/32x32.png",
       "icons/128x128.png",
       "icons/128x128@2x.png",
       "icons/icon.icns",
       "icons/icon.ico"
-    ],
-    "macOS": {
-      "bundleName": "幻想镇"
-    },
-    "windows": {
-      "nsis": {
-        "installMode": "currentUser",
-        "template": "installer.nsi"
-      }
-    }
+    ]
   }
 }
