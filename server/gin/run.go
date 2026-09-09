@@ -3,7 +3,7 @@ package gin
 import (
 	"log"
 
-	// "server/config"
+	// "hxzl/config"
 
 	g "github.com/gin-gonic/gin"
 )

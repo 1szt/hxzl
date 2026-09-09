@@ -1,7 +1,7 @@
 package gininit
 
 import (
-	web "server/gin"
+	web "hxzl/gin"
 
 	g "github.com/gin-gonic/gin"
 )

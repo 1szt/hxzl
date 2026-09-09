@@ -1,8 +1,8 @@
 package home
 
 import (
+	web "hxzl/gin"
 	"log"
-	web "server/gin"
 
 	g "github.com/gin-gonic/gin"
 )

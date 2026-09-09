@@ -1,4 +1,4 @@
-module server
+module hxzl
 
 go 1.27.0
 
