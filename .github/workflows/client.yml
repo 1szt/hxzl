@@ -35,13 +35,13 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22  # 升级到现代推荐的 Node 22
+          node-version: 22
 
       - name: Setup pnpm with Cache
         uses: pnpm/action-setup@v4
         with:
           version: 9
-          run_install: false # 使用 pnpm 官方 action 自带的缓存与安装管理
+          run_install: false
 
       - name: Get pnpm store directory
         id: pnpm-cache
@@ -57,25 +57,29 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
 
+      # 🔴 核心修改：在这里指定你的项目子目录名称（如果你的文件夹不叫 client，改成你的实际目录名）
       - name: Install Dependencies
+        working-directory: client
         run: pnpm install --frozen-lockfile
 
       - name: Build Electron App
+        working-directory: client
         run: pnpm ${{ matrix.build_cmd }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      # 🔴 核心修改：打包产物的路径也要加上子目录前缀
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v4
         with:
           name: release-${{ matrix.platform }}
           path: |
-            dist/*.exe
-            dist/*.dmg
-            dist/*.AppImage
-            dist/*.deb
-            dist/*.rpm
-            dist/*.snap
+            client/dist/*.exe
+            client/dist/*.dmg
+            client/dist/*.AppImage
+            client/dist/*.deb
+            client/dist/*.rpm
+            client/dist/*.snap
           if-no-files-found: ignore
 
   release:
