@@ -211,7 +211,7 @@ export default defineConfig(ctx => {
       // specify the debugging port to use for the Electron app when running in development mode
       inspectPort: 5858,
 
-      bundler: "packager", // 'packager' or 'builder'
+      bundler: "builder", // 'packager' or 'builder'
 
       packager: {
         // https://github.com/electron-userland/electron-packager/blob/master/docs/api.md#options
@@ -227,7 +227,21 @@ export default defineConfig(ctx => {
       builder: {
         // https://www.electron.build/configuration
 
-        appId: "hxzl"
+        appId: "hxzl",
+        productName: "hxzl",
+        win: {
+          target: [
+            { target: "nsis", arch: ["x64"] }, // 生成安装包
+            { target: "dir", arch: ["x64"] }   // 生成解压版文件夹（随时能跑）
+          ]
+        },
+        nsis: {
+          oneClick: false,                    // 关闭一键安装，开启向导模式
+          allowToChangeInstallationDirectory: true, // 允许用户自由选择安装路径
+          perMachine: false,                 // 允许用户选择是“仅为当前用户安装”还是“为所有用户安装（全局）”
+          createDesktopShortcut: true,       // 自动创建桌面快捷方式
+          runAfterFinish: true               // 安装完成后可选择直接运行
+        }
       }
     },
 
