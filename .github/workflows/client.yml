@@ -20,37 +20,29 @@ jobs:
           - os: windows-latest
             platform: win
             arch: x64
-            build_cmd: build:win
           - os: windows-latest
             platform: win
             arch: ia32
-            build_cmd: build:win
           - os: windows-latest
             platform: win
             arch: arm64
-            build_cmd: build:win
-          # ===== macOS (macos-latest 已经是 Apple Silicon ARM64) =====
+          # ===== macOS (macos-latest = Apple Silicon ARM64, macos-13 = Intel x64) =====
           - os: macos-latest
             platform: mac
             arch: arm64
-            build_cmd: build:mac
           - os: macos-13
             platform: mac
             arch: x64
-            build_cmd: build:mac
-          # ===== Linux (ubuntu-24.04-arm 是原生 ARM64 runner) =====
+          # ===== Linux (ubuntu-24.04-arm = 原生 ARM64 runner) =====
           - os: ubuntu-latest
             platform: linux
             arch: x64
-            build_cmd: build:linux
           - os: ubuntu-latest
             platform: linux
             arch: ia32
-            build_cmd: build:linux
           - os: ubuntu-24.04-arm
             platform: linux
             arch: arm64
-            build_cmd: build:linux
 
     runs-on: ${{ matrix.os }}
 
@@ -88,9 +80,13 @@ jobs:
         working-directory: client
         run: pnpm install --frozen-lockfile
 
-      - name: Build Electron App
+      - name: Compile TypeScript & Vite Build
         working-directory: client
-        run: pnpm ${{ matrix.build_cmd }} --arch ${{ matrix.arch }}
+        run: pnpm build
+
+      - name: Package Electron App
+        working-directory: client
+        run: pnpm exec electron-builder --${{ matrix.platform }} --arch ${{ matrix.arch }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
