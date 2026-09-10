@@ -1,7 +1,38 @@
-# Tauri + Vue + TypeScript
+# hxzl (hxzl)
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## Install the dependencies
 
-## Recommended IDE Setup
+```bash
+pnpm install
+# or: yarn/npm/bun install
+```
 
-- [VS Code](https://code.visualstudio.com/) + [Vue - Official](https://marketplace.visualstudio.com/items?itemName=Vue.volar) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
+### Start the app in development mode (HMR, error reporting, etc.)
+
+```bash
+quasar dev
+```
+
+### Format & Lint the files
+
+```bash
+pnpm run lint
+# or: yarn/npm/bun run lint
+```
+
+...or just check formatting & linting:
+
+```bash
+pnpm run lint:check
+# or: yarn/npm/bun run lint:check
+```
+
+### Build the app for production
+
+```bash
+quasar build
+```
+
+### Customize the configuration
+
+See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-vite/quasar-config-file).
