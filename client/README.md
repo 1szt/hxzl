@@ -1,34 +1,38 @@
-# hxzl
+# hxzl (hxzl)
 
-An Electron application with Vue and TypeScript
-
-## Recommended IDE Setup
-
-- [VSCode](https://code.visualstudio.com/) + [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) + [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
-
-## Project Setup
-
-### Install
+## Install the dependencies
 
 ```bash
-$ pnpm install
+pnpm install
+# or: yarn/npm/bun install
 ```
 
-### Development
+### Start the app in development mode (HMR, error reporting, etc.)
 
 ```bash
-$ pnpm dev
+quasar dev
 ```
 
-### Build
+### Format & Lint the files
 
 ```bash
-# For windows
-$ pnpm build:win
-
-# For macOS
-$ pnpm build:mac
-
-# For Linux
-$ pnpm build:linux
+pnpm run lint
+# or: yarn/npm/bun run lint
 ```
+
+...or just check formatting & linting:
+
+```bash
+pnpm run lint:check
+# or: yarn/npm/bun run lint:check
+```
+
+### Build the app for production
+
+```bash
+quasar build
+```
+
+### Customize the configuration
+
+See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-vite/quasar-config-file).
