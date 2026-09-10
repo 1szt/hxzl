@@ -16,14 +16,40 @@ jobs:
       fail-fast: false
       matrix:
         include:
+          # ===== Windows (x64/ia32 原生, arm64 交叉编译) =====
           - os: windows-latest
             platform: win
+            arch: x64
             build_cmd: build:win
+          - os: windows-latest
+            platform: win
+            arch: ia32
+            build_cmd: build:win
+          - os: windows-latest
+            platform: win
+            arch: arm64
+            build_cmd: build:win
+          # ===== macOS (macos-latest 已经是 Apple Silicon ARM64) =====
           - os: macos-latest
             platform: mac
+            arch: arm64
             build_cmd: build:mac
+          - os: macos-13
+            platform: mac
+            arch: x64
+            build_cmd: build:mac
+          # ===== Linux (ubuntu-24.04-arm 是原生 ARM64 runner) =====
           - os: ubuntu-latest
             platform: linux
+            arch: x64
+            build_cmd: build:linux
+          - os: ubuntu-latest
+            platform: linux
+            arch: ia32
+            build_cmd: build:linux
+          - os: ubuntu-24.04-arm
+            platform: linux
+            arch: arm64
             build_cmd: build:linux
 
     runs-on: ${{ matrix.os }}
@@ -64,7 +90,7 @@ jobs:
 
       - name: Build Electron App
         working-directory: client
-        run: pnpm ${{ matrix.build_cmd }}
+        run: pnpm ${{ matrix.build_cmd }} --arch ${{ matrix.arch }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -72,10 +98,11 @@ jobs:
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: release-${{ matrix.platform }}
+          name: release-${{ matrix.platform }}-${{ matrix.arch }}
           path: |
             client/dist/*.exe
             client/dist/*.dmg
+            client/dist/*.zip
             client/dist/*.AppImage
             client/dist/*.deb
             client/dist/*.rpm
@@ -91,6 +118,7 @@ jobs:
       - name: Download All Artifacts
         uses: actions/download-artifact@v4
         with:
+          pattern: release-*
           path: artifacts
           merge-multiple: true
 
@@ -101,11 +129,12 @@ jobs:
           prerelease: false
           generate_release_notes: true
           files: |
-            artifacts/*.exe
-            artifacts/*.dmg
-            artifacts/*.AppImage
-            artifacts/*.deb
-            artifacts/*.rpm
-            artifacts/*.snap
+            artifacts/**/*.exe
+            artifacts/**/*.dmg
+            artifacts/**/*.zip
+            artifacts/**/*.AppImage
+            artifacts/**/*.deb
+            artifacts/**/*.rpm
+            artifacts/**/*.snap
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
