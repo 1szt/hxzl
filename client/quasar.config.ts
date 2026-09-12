@@ -229,10 +229,12 @@ export default defineConfig(ctx => {
 
         appId: "hxzl",
         productName: "hxzl",
+        // 自定义安装包和压缩包的命名规则
+        artifactName: "${productName}-${version}-${arch}.${ext}",
         win: {
           target: [
-            { target: "nsis", arch: ["x64"] }, // 生成安装包
-            { target: "dir", arch: ["x64"] }   // 生成解压版文件夹（随时能跑）
+            { target: "nsis", arch: ["x64", "arm64"] }, // 同时生成 x64 和 arm64 安装包
+            { target: "dir", arch: ["x64", "arm64"] }   // 同时生成 x64 和 arm64 绿色文件夹
           ]
         },
         nsis: {
