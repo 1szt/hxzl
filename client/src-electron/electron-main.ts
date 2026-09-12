@@ -19,6 +19,8 @@ async function createWindow() {
     height: 600,
     useContentSize: true,
     autoHideMenuBar: true,
+    frame: false,
+    // transparent: true,
     webPreferences: {
       contextIsolation: true,
       // https://v2.quasar.dev/quasar-cli-vite/developing-electron-apps/electron-preload-script
